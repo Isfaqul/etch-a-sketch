@@ -16,6 +16,7 @@ body {
   display: grid;
   place-items: center;
   background-color: rgb(227, 227, 227);
+  align-content: center;
 }
 
 .app-ctnr {
