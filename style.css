@@ -1,0 +1,224 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 62.5%;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: rgb(227, 227, 227);
+}
+
+.app-ctnr {
+  width: 94rem;
+  height: 64.5rem;
+  background: linear-gradient(135deg, #6586fd 0%, #0d25b9 100%);
+  padding: 2.55em 5em 5em 5em;
+  color: white;
+  border-radius: 0.6rem;
+}
+
+.title {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+}
+
+.console-ctnr {
+  display: flex;
+  justify-content: space-between;
+  gap: 5em;
+}
+
+.config-ctnr {
+  width: 100%;
+  max-width: 29rem;
+  border-radius: 0.25rem;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.21) 100%
+  );
+  border: 2px solid rgb(255 255 255 / 0.3);
+  padding: 2.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.drawing-board {
+  max-width: 500px;
+  max-height: 500px;
+  width: 500px;
+  height: 500px;
+  min-width: 300px;
+  min-height: 300px;
+  background-color: white;
+  border-radius: 0.3rem;
+  display: grid;
+}
+
+.btn:active {
+  background-color: rgb(214, 214, 214);
+}
+
+.grid-item {
+  background-color: white;
+  cursor: cell;
+}
+
+.grid-item:hover {
+  background-color: rgba(227, 178, 223, 0.5);
+}
+
+/* Color Picker Styles */
+
+.color-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2em;
+}
+
+.color-picker-label {
+  display: block;
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0d25b9;
+  text-align: left;
+  flex: 1;
+}
+
+.color-picker {
+  display: block;
+  flex: 0.3;
+  width: 100%;
+  border: none;
+  outline: none;
+  height: 5rem;
+  background-color: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.color-picker::-webkit-color-swatch {
+  border-radius: 15rem;
+  border: 3px solid white;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.color-picker::-moz-color-swatch {
+  border-radius: 15rem;
+  border: 3px solid white;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* Grid Size Container Style */
+
+.grid-size-label,
+.display-grid-size {
+  display: block;
+}
+
+.grid-size-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 2em;
+}
+
+.grid-size-label {
+  width: 100%;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0d25b9;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.show-chosen-grid-size {
+  color: white;
+  font-size: 1.7rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+#grid-size {
+  margin-top: 0.5em;
+  width: 100%;
+  appearance: none;
+  border-radius: 2rem;
+  height: 0.7rem;
+  cursor: grab;
+  -webkit-appearance: none;
+}
+
+#grid-size::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.8rem;
+  width: 1.8rem;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+#grid-size::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+/* Erase All Btn Style */
+
+.btn {
+  margin-top: 0.94em;
+  display: block;
+  width: 100%;
+  font-family: "JetBrains Mono", monospace;
+  padding: 0.4em 1em;
+  font-size: 2.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border: 1px solid transparent;
+  box-shadow: 0px 3px 0px 0px #2d48d2;
+  transition: all 100ms ease-in-out;
+}
+
+.erase-all-btn {
+  color: #0d25b9;
+  background-color: white;
+}
+
+.rainbow-btn {
+  color: #0d25b9;
+  background-color: white;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0px 4px 0px 0px #2d48d2;
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: 0px 0px 0px 0px #2d48d2;
+}
