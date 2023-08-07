@@ -4,6 +4,14 @@ const colorPickerEl = document.querySelector(".color-picker");
 const eraseAllBtn = document.querySelector(".erase-all-btn");
 const gridSizeTextEl = document.querySelector(".show-chosen-grid-size");
 const rainbowModeBtn = document.querySelector(".rainbow-btn");
+const shadingToggleBtn = document.querySelector(".shading-toggle-btn");
+
+// Set a flag to enable/disable drawing
+let drawing = false;
+// Rainbow Mode Flag
+let rainbowMode = false;
+// Set Shading Flag
+let shade = false;
 
 // Draw Board immediately after page loads
 drawBoard(drawingBoard, gridSizeEl.value);
@@ -21,19 +29,39 @@ function drawBoard(boardEl, size) {
     gridItem.classList.add("grid-item");
     boardEl.appendChild(gridItem);
   }
+
+  // Handle Shade
+  if (shade) setAllGridItemsToBlack(boardEl);
+  else setAllGridItemsToDefault(boardEl);
 }
+
+// listen for shading enablement
+shadingToggleBtn.addEventListener("click", () => {
+  if (!shade) {
+    shade = true;
+    shadingToggleBtn.innerText = "Shading On";
+    setAllGridItemsToBlack(drawingBoard);
+
+    // Turn Rainbow Off
+    rainbowMode = false;
+    rainbowModeBtn.innerText = "Rainbow Off";
+  } else {
+    shade = false;
+    shadingToggleBtn.innerText = "Shading Off";
+    setAllGridItemsToDefault(drawingBoard);
+  }
+});
 
 // Draw board on gridSize Change
 gridSizeEl.addEventListener("change", () => {
   drawBoard(drawingBoard, gridSizeEl.value);
 });
 
-// Set a flag to enable/disable drawing
-let drawing = false;
-
 // enable drawing on mousedown on canvas
 drawingBoard.addEventListener("mousedown", () => {
-  if (!drawing) drawing = true;
+  if (!drawing) {
+    drawing = true;
+  }
 });
 
 // disable drawing when mouseup on canvas
@@ -41,10 +69,15 @@ drawingBoard.addEventListener("mouseup", () => {
   if (drawing) drawing = false;
 });
 
-// Enable Drawing
+// draw while drawing is true
 drawingBoard.addEventListener("mousemove", (e) => {
   e.preventDefault();
-  draw(colorPickerEl.value, e);
+
+  if (shade && drawing) {
+    shading(e.target.style.opacity, e);
+  } else if (drawing) {
+    draw(colorPickerEl.value, e);
+  }
 });
 
 // Function to handle drawing
@@ -60,12 +93,12 @@ function draw(color, event) {
 
 // function to reset board when grid size changes
 function resetBoard(board) {
-  let child = board.lastElementChild;
-
-  while (child) {
-    board.removeChild(child);
-    child = board.lastElementChild;
-  }
+  // let child = board.lastElementChild;
+  // while (child) {
+  //   board.removeChild(child);
+  //   child = board.lastElementChild;
+  // }
+  board.innerHTML = "";
 }
 
 // Event Listner Handle erase all btn
@@ -79,9 +112,6 @@ function updateGridSizeText(element, size) {
   element.innerText = `${size} x ${size}`;
 }
 
-// Rainbow Mode Flag
-let rainbowMode = false;
-
 // Listen for Raninbow mode Btn
 rainbowModeBtn.addEventListener("click", () => {
   if (rainbowMode) {
@@ -90,6 +120,13 @@ rainbowModeBtn.addEventListener("click", () => {
   } else {
     rainbowMode = true;
     rainbowModeBtn.innerText = "Rainbow On";
+
+    // Turn Shade off
+    shade = false;
+    shadingToggleBtn.innerText = "Shading Off";
+    // And reset board
+    resetBoard(drawingBoard);
+    drawBoard(drawingBoard, gridSizeEl.value);
   }
 });
 
@@ -133,4 +170,30 @@ function randomColor(index) {
   ];
 
   return rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+}
+
+// Shading Function
+function shading(opacity, event) {
+  opacity = +event.target.style.opacity;
+
+  if (opacity < 1) {
+    opacity += 0.02;
+    event.target.style.opacity = opacity;
+  }
+}
+
+// Set All Grid Items to Black and Opacity 0
+function setAllGridItemsToBlack(drawingBoard) {
+  for (let child of drawingBoard.children) {
+    child.style.backgroundColor = "black";
+    child.style.opacity = 0;
+  }
+}
+
+// Set All Grid Items to default styles
+function setAllGridItemsToDefault(drawingBoard) {
+  for (let child of drawingBoard.children) {
+    child.style.backgroundColor = "";
+    child.style.opacity = "";
+  }
 }
