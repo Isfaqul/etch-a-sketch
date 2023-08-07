@@ -5,6 +5,7 @@ const eraseAllBtn = document.querySelector(".erase-all-btn");
 const gridSizeTextEl = document.querySelector(".show-chosen-grid-size");
 const rainbowModeBtn = document.querySelector(".rainbow-btn");
 const shadingToggleBtn = document.querySelector(".shading-toggle-btn");
+const eraserBtn = document.querySelector(".eraser-btn");
 
 // Set a flag to enable/disable drawing
 let drawing = false;
@@ -12,6 +13,7 @@ let drawing = false;
 let rainbowMode = false;
 // Set Shading Flag
 let shade = false;
+// Eraser Flag
 
 // Draw Board immediately after page loads
 drawBoard(drawingBoard, gridSizeEl.value);
