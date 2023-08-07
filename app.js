@@ -94,10 +94,43 @@ rainbowModeBtn.addEventListener("click", () => {
 });
 
 // color randomiser function
-function randomColor() {
-  let r = Math.floor(Math.random() * 256);
-  let g = Math.floor(Math.random() * 256);
-  let b = Math.floor(Math.random() * 256);
+function randomColor(index) {
+  const rainbowColors = [
+    // Red
+    "#FFC0CB",
+    "#FF0000",
+    "#800000",
 
-  return `rgb(${r}, ${g}, ${b})`;
+    // Orange
+    "#FFD700",
+    "#FFA500",
+    "#FF4500",
+
+    // Yellow
+    "#FFFFE0",
+    "#FFFF00",
+    "#808000",
+
+    // Green
+    "#98FB98",
+    "#008000",
+    "#006400",
+
+    // Blue
+    "#ADD8E6",
+    "#0000FF",
+    "#00008B",
+
+    // Indigo
+    "#9370DB",
+    "#4B0082",
+    "#32007A",
+
+    // Violet
+    "#EE82EE",
+    "#800080",
+    "#9400D3",
+  ];
+
+  return rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
 }
