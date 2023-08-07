@@ -5,7 +5,6 @@ const eraseAllBtn = document.querySelector(".erase-all-btn");
 const gridSizeTextEl = document.querySelector(".show-chosen-grid-size");
 const rainbowModeBtn = document.querySelector(".rainbow-btn");
 const shadingToggleBtn = document.querySelector(".shading-toggle-btn");
-const eraserBtn = document.querySelector(".eraser-btn");
 
 // Set a flag to enable/disable drawing
 let drawing = false;
@@ -13,7 +12,6 @@ let drawing = false;
 let rainbowMode = false;
 // Set Shading Flag
 let shade = false;
-// Eraser Flag
 
 // Draw Board immediately after page loads
 drawBoard(drawingBoard, gridSizeEl.value);
@@ -45,8 +43,10 @@ shadingToggleBtn.addEventListener("click", () => {
     setAllGridItemsToBlack(drawingBoard);
 
     // Turn Rainbow Off
-    rainbowMode = false;
-    rainbowModeBtn.innerText = "Rainbow Off";
+    if (rainbowMode) {
+      rainbowMode = false;
+      rainbowModeBtn.innerText = "Rainbow Off";
+    }
   } else {
     shade = false;
     shadingToggleBtn.innerText = "Shading Off";
@@ -77,7 +77,7 @@ drawingBoard.addEventListener("mousemove", (e) => {
 
   if (shade && drawing) {
     shading(e.target.style.opacity, e);
-  } else if (drawing) {
+  } else {
     draw(colorPickerEl.value, e);
   }
 });
@@ -123,12 +123,15 @@ rainbowModeBtn.addEventListener("click", () => {
     rainbowMode = true;
     rainbowModeBtn.innerText = "Rainbow On";
 
-    // Turn Shade off
-    shade = false;
-    shadingToggleBtn.innerText = "Shading Off";
-    // And reset board
-    resetBoard(drawingBoard);
-    drawBoard(drawingBoard, gridSizeEl.value);
+    // Turn Shade off it's on
+    if (shade) {
+      shade = false;
+      shadingToggleBtn.innerText = "Shading Off";
+
+      // And reset board
+      resetBoard(drawingBoard);
+      drawBoard(drawingBoard, gridSizeEl.value);
+    }
   }
 });
 
